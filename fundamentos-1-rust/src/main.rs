@@ -90,6 +90,10 @@ fn main() {
 
     let miPersona = Persona{nombre: String::from("Sergio"), le_gustan_las_naranjas:true, edad:19};
 
+    miPersona.nombre;
+    miPersona.edad;
+    miPersona.le_gustan_las_naranjas;
+
     let miPunto2d = Punto2d(0,0);
 
     let miUnitaria = PUnitaria;
@@ -105,9 +109,188 @@ fn main() {
         Click{x: i64, y: i64} //estructura (objeto) tipo tupla con coordenadas
     }
 
+    let e:EventoWeb = EventoWeb::Cargada;
+
+    struct Click{
+        x: i64,
+        y: i64
+    }
+
+    //funciones
+
+    funcion1();
+
+    let f:bool = es_divisible_entre(100, 50);
+    println!("{}", f);
+
+    //colecciones
+
+    // -> arrays, tienen un tamaño conocido e inmutable, son listas elementos del mismo tipo
+
+    let mut diasDeLaSemana = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"];
+
+    println!("Lunes->{}\nTamaño del array: {}", diasDeLaSemana[0], diasDeLaSemana.len());
+
+    
+    //vectores, arrays pero su tamaño puede aumentarse o reducirse en otro momento.
+
+    let mut vector3Numeros = vec![1,2,3];
+    println!("vector de 3 numeros: {:?}", vector3Numeros);
+
+    let mut diezCeros = vec![0; 10];
+    println!("Diez ceros: {:?}", diezCeros);
+
+    //se pueden crear variables de tipos de varias formas, con macros: vec!, println!, casi todo lo que tiene ! son macros
+    // yluego tambien con el Vec::new()
+
+    //en lugar de hacer -> let mut v = vec![1]      //habria que pasarle un parametro que lo inicializara si o si con algun valor dentro
+    //hago              -> let mut v = Vec::new()   //en este caso se inicia a empty
+
+    //creo un vector vacío
+
+    let mut v = Vec::new();
+    v.push(4);
+    v.push(5);
+    v.push(6);
+    v.push(7);
+    println!("{:?}", v);
+
+    //para sacar el ultimo parametro se puede usar 
+    let ultimo = v.pop();
+    println!("{:?}", ultimo);
+
+    
+    //HashMaps -> clave: valor
+
+    //std es la libreria estandar
+
+        //imports
+    use std::collections::HashMap;
+    
+
+    let mut miHashMap: HashMap<String, String> = HashMap::new();
+
+    miHashMap.insert("clave1".to_string(), "valor1".to_string());
+    miHashMap.insert("clave2".to_string(), "valor2".to_string());
+    miHashMap.insert("clave3".to_string(), "valor3".to_string());
+    miHashMap.insert("clave4".to_string(), "valor4".to_string());
+
+    //el .to_string() transforma un valor literal de cadena (&str) en String
+    //si fuese &str sería una coleccion de punteros, ya que guarda la referencia, una direccion de memoria, pero al hacerlo String lo guarda directamente el valor
+
+    let claveABuscar = "clave1"; //no hace falta ponerle al tostring ya que pueden usar referencias para las consultas
+    if !miHashMap.contains_key(claveABuscar)
+    {
+        println!("Si existe un elemento con clave: {}", claveABuscar)
+    }
+    else{
+        println!("No existe un elemento con clave: {}", claveABuscar)
+    }
+
+    //se puede buscar por key
+    println!("valor de {}: {}",claveABuscar, miHashMap[claveABuscar]);
+
+    //basicamente si pongo miHashMap["clave"] me devuelve el valor de esa clave, siempre que exista, sino explota y panickea
+    println!("{}", miHashMap["clave1"].to_string());
+
+    //para evitar el panic se puede usar el .get() en los mapas
+    
+    miHashMap.get("clave1");
 
 
+    //hashset
+    //use std::collections::HashSet;
+
+
+    //tambien se pueden usar los if como expresiones
+
+    let b = true;
+
+    let saludo = if b {
+        "Buenas"
+    } else{
+        "No buenas"
+    };
+
+    println!("{}", saludo);
+
+
+    //bucle infinito
+
+    let mut i = 0;
+    loop{
+        
+        i+=1;   //i = i + 1
+
+        if i == 10{
+            println!("i es: {}", i);
+            break
+        }
+    }
+
+    println!("he salido del bucle");
+
+    //puedes asignar un loop a una variable y devolverle el valor que quieres que tome con el break
+
+    i = 1;
+
+    let algo = loop { //esto se podría pasar de linea perfectamente como en java
+        i *= 2; //i = i * 2
+
+        if i > 100 {
+            break i
+        }
+    };
+
+    println!("{}", algo);
+
+    //bucles while
+
+    let mut contador = 0;
+
+    while contador < 10 {
+        println!("hola contador {}", contador);
+        contador += 1;
+    }
+
+    //bucles for
+
+    //elemento iterable
+
+    let a = [10, 20, 30, 40, 50]; //array
+
+    for i in a.iter() {
+        println!("El valor es: {}", i);
+    }
+
+    //o bien
+
+    for i in 0..5 {
+        println!("{}", i);
+    }
 
 
 
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+fn funcion1()
+{
+    println!("funcion 1");
+}
+
+fn es_divisible_entre(dividendo: u32, divisor: u32) -> bool{
+
+    let mut sino:bool = false;
+
+    if dividendo % divisor == 0{
+        sino = true;
+    }
+
+    return sino;   //esto al ser la última linea me la retorna como si llevase un return delante
+}
+
+
+
+
