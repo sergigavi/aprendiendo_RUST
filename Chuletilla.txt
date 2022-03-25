@@ -1,0 +1,6 @@
+
+Para compilar un archivo es con: rustc {nombre del archivo}.
+
+Para crear un proyecto con cargo: cargo new {nombre del proyecto}
+
+para ejecutar con cargo nos situamos dentro del proyecto cargo con cd y ponemos: cargo run
